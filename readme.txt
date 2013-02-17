@@ -25,13 +25,13 @@ PS: question, [eewee.fr](http://www.eewee.fr).
 
 == Screenshots ==
 
-1. Front office : Dish.
-1. Front office : Menu.
-1. Back office : Create your dish.
-1. Back office : Create a category dish.
-1. Back office : Create your menu.
-1. Back office : Compose your menu.
-1. Back office : Create your currency.
+1. Front office - Dish.
+1. Front office - Menu.
+1. Back office - Create your dish.
+1. Back office - Create a category dish.
+1. Back office - Create your menu.
+1. Back office - Compose your menu.
+1. Back office - Create your currency.
 
 == Frequently Asked Questions ==
 * More informations : [eewee.fr](http://www.eewee.fr).
