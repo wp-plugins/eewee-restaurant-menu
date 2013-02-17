@@ -1,0 +1,109 @@
+<?php global $wpdb; ?>
+
+<div class="wrap" >
+    <div id="icon-options-general" class="icon32"><br></div>
+    <h2><?php _e('Menu', PLUGIN_NOM_LANG); ?> <a href="<?php echo $_SERVER["REQUEST_URI"]."&type=add"; ?>" class="add-new-h2"><?php _e('Add', PLUGIN_NOM_LANG); ?></a></h2>
+    
+    <?php 
+    // FORM
+    $f_menuSearch = new Form_MenuSearch();
+    $f_menuSearch->search( $_POST );
+    ?>
+</div>
+
+<?php
+// UPDATE : ETAT
+if( $_GET['type'] == "etat" ){
+	$t_menu = new TMenu();
+        $r = $t_menu->updateEtat($_GET);
+
+        $tools = new ToolsControllers();
+	$tools->verifMaj( $r );
+}//if
+?>
+
+
+<?php
+// SEARCH
+if( !empty( $_POST['btn_formMenuSearch'] ) ){
+	
+	$tbl_reqSuite = array();
+	
+	//$tbl_reqSuite[] = " ETAT=%s";
+	//$tbl_params[] = 0;		
+		
+	if( !empty( $_POST['formMenuSearch_nom'] ) ){
+		$tbl_reqSuite[] = " NOM LIKE %s";
+		$tbl_params[] = "%".$_POST['formMenuSearch_nom']."%";		
+	}
+	$reqSuite = " WHERE ";
+	$reqSuite .= implode(" AND ", $tbl_reqSuite);
+	$reqSuite .= " ORDER BY ID_MENU DESC";
+	
+}else{
+	$reqSuite = " ORDER BY ID_MENU DESC";
+	$reqSuite .= " LIMIT 50";
+}
+
+// req
+$t_menu = new TMenu();
+$r = $t_menu->getMenus( $reqSuite, $tbl_params );
+
+// display
+$render = "
+<table class='eewee-table'>
+	<tr>
+		<th>
+			".__('Id', PLUGIN_NOM_LANG)."
+		</th>
+		<th>
+			".__('Name', PLUGIN_NOM_LANG)."
+		</th>
+                <th>
+			".__('Price', PLUGIN_NOM_LANG)."
+		</th>
+		<th>
+			".__('State', PLUGIN_NOM_LANG)."
+		</th>
+		<th>
+			".__('Edit', PLUGIN_NOM_LANG)."
+		</th>
+	</tr>";
+
+	foreach($r as $v){
+		$render .= "
+		<tr>
+			<td class='c'>
+				".$v->ID_MENU."
+			</td>
+			<td>
+				".$v->NOM."
+			</td>
+                        <td class='c'>
+				".$v->PRIX."
+			</td>
+			<td class='c'>";
+				
+				if( $v->ETAT ){
+					$render .= "
+					<a href='".EEWEE_RESTAURANT_MENU_URL_SOUS_MENU_1."&type=etat&etat=0&idMenu=".$v->ID_MENU."'>
+						<img src='".EEWEE_RESTAURANT_MENU_PLUGIN_URL."/images/icones/disabled.gif' />
+					</a>";
+				}else{
+					$render .= "
+					<a href='".EEWEE_RESTAURANT_MENU_URL_SOUS_MENU_1."&type=etat&etat=1&idMenu=".$v->ID_MENU."'>
+						<img src='".EEWEE_RESTAURANT_MENU_PLUGIN_URL."/images/icones/enabled.gif' />
+					</a>";
+				}	
+		
+			$render .= "
+			</td>
+			<td class='c'>
+				<a href='".EEWEE_RESTAURANT_MENU_URL_SOUS_MENU_1."&type=edit&idMenu=".$v->ID_MENU."'>".__('Edit', PLUGIN_NOM_LANG)."</a>
+			</td>
+		</tr>";
+	}//fin foreach
+
+$render .= "
+</table>";
+echo $render;
