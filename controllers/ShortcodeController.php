@@ -27,6 +27,11 @@
                             $devises = $t_devise->getDevises( " WHERE ETAT='0' LIMIT 1");
                             if( isset($devises[0]->NOM) ){
                                 $devise = $devises[0]->NOM;
+                                $location = $devises[0]->LOCATION;
+                                
+                                $separator_val = $devises[0]->SEPARATOR;
+                                $tbl_sep = $t_devise->getSeparator();
+                                $sep = $tbl_sep[$separator_val];
                             }
                         
                             // composition menu
@@ -55,8 +60,15 @@
                             
                             $a = "
                             <div class='restaurant-menu'>
-                                <h2 class='title'>".$menu[0]->NOM."<span class='f_r'>".$menu[0]->PRIX."&nbsp;".$devise."</span></h2>
-                                ".$composition."
+                                <h2 class='title'>".$menu[0]->NOM."<span class='f_r'>";
+                            
+                                if( $location == 1 ){ $a .= $devise."&nbsp;"; }
+                            
+                                $a .= number_format($menu[0]->PRIX, 2, $sep, '');
+                                    
+                                if( $location == 0 ){ $a .= "&nbsp;".$devise; }
+                                
+                                $a .= "</span></h2>".$composition."
                             </div>";
 
                             return $a;
@@ -76,6 +88,11 @@
                     $devises = $t_devise->getDevises( " WHERE ETAT='0' LIMIT 1");
                     if( isset($devises[0]->NOM) ){
                         $devise = $devises[0]->NOM;
+                        $location = $devises[0]->LOCATION;
+                                
+                        $separator_val = $devises[0]->SEPARATOR;
+                        $tbl_sep = $t_devise->getSeparator();
+                        $sep = $tbl_sep[$separator_val];
                     }
 
                     $t_platCateg = new TPlatCategorie();
@@ -104,7 +121,15 @@
                             $t_plat = new TPlat();
                             $plats = $t_plat->getPlats( " WHERE ID_PLAT_CATEGORIE='".$platCateg->ID_PLAT_CATEGORIE."' AND ETAT='0'");
                             foreach($plats as $plat){
-                                $composition .= "<p><span class='plat'>".$plat->NOM."</span> <span class='ingredients'>(".$plat->INGREDIENT.")</span> <span class='f_r'>".$plat->PRIX."&nbsp;".$devise."</span></p>";
+                                $composition .= "<p><span class='plat'>".$plat->NOM."</span> <span class='ingredients'>(".$plat->INGREDIENT.")</span> <span class='f_r'>";
+                                
+                                if( $location == 1 ){ $composition .= $devise."&nbsp;"; }
+                            
+                                $composition .= number_format($plat->PRIX, 2, $sep, '');
+                                    
+                                if( $location == 0 ){ $composition .= "&nbsp;".$devise; }
+                                        
+                                $composition .= "</span></p>";
                             }
                         }
                     }

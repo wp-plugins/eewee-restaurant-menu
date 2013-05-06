@@ -41,6 +41,12 @@ PS: question, [eewee.fr](http://www.eewee.fr).
 
 == Changelog ==
 
+= 1.4 =
+* Add : Location currency
+* Add : Separator price
+* Add : 2 decimal places
+* SQL : ALTER TABLE  `wp_eewee_restaurant_devise` ADD  `LOCATION` INT( 11 ) NOT NULL AFTER  `ETAT`, ADD  `SEPARATOR` INT( 11 ) NOT NULL AFTER  `LOCATION`
+
 = 1.3 =
 * Fixed : debug mode
 

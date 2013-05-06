@@ -29,7 +29,41 @@ if( !class_exists(Form_DeviseEdit)){
 					<div class="inside">
 			
 						<p>
-							<?php _e('Name', PLUGIN_NOM_LANG); ?> : <input type="text" name="form_nom" value="<?php echo $r[0]->NOM; ?>" />
+							<?php _e('Name', PLUGIN_NOM_LANG); ?> : 
+                                                        <input type="text" name="form_nom" value="<?php echo $r[0]->NOM; ?>" />
+						</p>
+                                                <p>
+                                                        <?php
+                                                        $selected0 = $selected1 = "";
+                                                        if( $r[0]->LOCATION == 0 ){ $selected0 = "selected"; }
+                                                        if( $r[0]->LOCATION == 1 ){ $selected1 = "selected"; }
+                                                        ?>
+                                                    
+							<?php _e('Location', PLUGIN_NOM_LANG); ?> : 
+                                                        <select name='form_location'>
+                                                            <option value='0' <?php echo $selected0; ?>><?php _e('After', PLUGIN_NOM_LANG); ?></option>
+                                                            <option value='1' <?php echo $selected1; ?>><?php _e('Before', PLUGIN_NOM_LANG); ?></option>
+                                                        </select>
+						</p>
+                                                <p>
+                                                        <?php
+                                                        $selected = "";
+                                                        $t_devise = new TDevise();
+                                                        $separator = $t_devise->getSeparator();
+                                                        ?>
+                                                    
+							<?php _e('Separator', PLUGIN_NOM_LANG); ?> : 
+                                                        <select name='form_separator'>
+                                                            <?php 
+                                                            foreach( $separator as $k=>$v ){ 
+                                                                if( $r[0]->SEPARATOR == $k ){ $selected = "selected"; }else{ $selected = ""; }
+                                                                ?>
+                                                                
+                                                                <option value='<?php echo $k; ?>' <?php echo $selected; ?>><?php echo $v; ?></option>
+                                                                
+                                                            <?php
+                                                            } ?>
+                                                        </select>
 						</p>
 						<p>
 							<?php 

@@ -3,6 +3,8 @@ if( !class_exists(TDevise)){
 	class TDevise extends WP_Query{
 		
 		private $_table;
+                private $tbl_separator = array( ".", "," );
+                
 		
 		function __construct(){
 			$this->_table = EEWEE_RESTAURANT_MENU_PREFIXE_BDD."devise";
@@ -39,11 +41,15 @@ if( !class_exists(TDevise)){
 				$this->_table,
 				array(
 					'NOM' => stripslashes($p['form_nom']),
-					'ETAT' => $p['form_etat']
+					'ETAT' => $p['form_etat'],
+                                        'LOCATION' => $p['form_location'],
+                                        'SEPARATOR' => $p['form_separator']
 				),
 				array(
 					'%s',
-					'%d'
+					'%d',
+                                        '%d',
+                                        '%s'
 				)
 			);
 			return $r;
@@ -88,7 +94,9 @@ if( !class_exists(TDevise)){
 				// SET (valeur)
 				array(
 					'NOM' => $p['form_nom'],
-					'ETAT' => $p['form_etat']
+					'ETAT' => $p['form_etat'],
+                                        'LOCATION' => $p['form_location'],
+                                        'SEPARATOR' => $p['form_separator']
 				),
 				// WHERE (valeur)
 				array(
@@ -97,7 +105,9 @@ if( !class_exists(TDevise)){
 				// SET (type)
 				array(
 					'%s',
-					'%d'
+					'%d',
+                                        '%d',
+                                        '%s'
 				),
 				// WHERE (type)
 				array(
@@ -106,6 +116,13 @@ if( !class_exists(TDevise)){
 			);
 			return $r;
 		}
+                
+                /**
+		 * getSeparator
+		 */
+                public function getSeparator(){
+                    return $this->tbl_separator;
+                }
 		
 	}
 }

@@ -16,6 +16,8 @@
                       `ID_DEVISE` int(11) NOT NULL AUTO_INCREMENT,
                       `NOM` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
                       `ETAT` tinyint(1) NOT NULL,
+                      `LOCATION` int(11) NOT NULL,
+                      `SEPARATOR` int(11) NOT NULL,
                       PRIMARY KEY (`ID_DEVISE`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
                     ";
