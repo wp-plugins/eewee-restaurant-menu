@@ -41,6 +41,27 @@ PS: question, [eewee.fr](http://www.eewee.fr).
 
 == Changelog ==
 
+= 1.6 =
+* Add   : multilingual add of Products
+
+= 1.5 =
+* Fixed : not display parenthesis if there is no ingredients
+* Add   : multilingual edition of Products
+* SQL   : CREATE TABLE `".EEWEE_RESTAURANT_MENU_PREFIXE_BDD."lang` (
+                      `ID_LANG` int(11) NOT NULL AUTO_INCREMENT,
+                      `NOM` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+                      `ETAT` tinyint(1) NOT NULL,
+                      PRIMARY KEY (`ID_LANG`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+* SQL   :  CREATE TABLE `".EEWEE_RESTAURANT_MENU_PREFIXE_BDD."lang_plat` (
+                      `ID_LANG_PLAT` int(11) NOT NULL AUTO_INCREMENT,
+                      `ID_LANG` int(11) NOT NULL,
+                      `ID_PLAT` int(11) NOT NULL,
+                      `NOM` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+                      `INGREDIENT` text NOT NULL,
+                      PRIMARY KEY (`ID_LANG_PLAT`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 = 1.4 =
 * Add : Location currency
 * Add : Separator price

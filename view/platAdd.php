@@ -5,6 +5,9 @@ global $wpdb;
 if( $_POST['add'] ){
 	$t_plat = new TPlat();
 	$r = $t_plat->add( $_POST );
+        
+        $t_plat_plat = new TLangPlat();
+	$r = $t_plat_plat->add( $_POST, $wpdb->insert_id );
     
 	$tools = new ToolsControllers();
 	$tools->verifMaj( $r );

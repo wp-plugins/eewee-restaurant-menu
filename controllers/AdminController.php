@@ -4,7 +4,9 @@ if( !class_exists(AdminController)){
 	class AdminController{
 		
 		function __construct(){}
-		function init(){ $this->getOptionsAdmin(); }
+		function init(){ 
+                    //$this->getOptionsAdmin();
+                }
 		
 		/**
 		 * execute lors de l'activation du plugin
@@ -42,6 +44,7 @@ if( !class_exists(AdminController)){
                         add_submenu_page( "idRestaurantMenu", "Plat", "Plat", "manage_options", "idSousMenu5", array($this, "sousMenu5"));
                         add_submenu_page( "idRestaurantMenu", "Devise", "Devise", "manage_options", "idSousMenu6", array($this, "sousMenu6"));
                         add_submenu_page( "idRestaurantMenu", "Taxe", "Taxe", "manage_options", "idSousMenu7", array($this, "sousMenu7"));
+                        add_submenu_page( "idRestaurantMenu", "Langue", "Langue", "manage_options", "idSousMenu8", array($this, "sousMenu8"));
 
 			// appel init
 			add_action('admin_init', array($this, 'init'));
@@ -58,11 +61,13 @@ if( !class_exists(AdminController)){
 		function sousMenu5(){ include(EEWEE_RESTAURANT_MENU_PLUGIN_DIR.'/view/platRoot.php'); }
 		function sousMenu6(){ include(EEWEE_RESTAURANT_MENU_PLUGIN_DIR.'/view/deviseRoot.php'); }
 		function sousMenu7(){ include(EEWEE_RESTAURANT_MENU_PLUGIN_DIR.'/view/taxeRoot.php'); }
+		function sousMenu8(){ include(EEWEE_RESTAURANT_MENU_PLUGIN_DIR.'/view/langRoot.php'); }
 		
 		/**
 		 * Définition des options
 		 */
-		function getOptionsAdmin(){
+		/*
+                function getOptionsAdmin(){
 			//assigne les valeurs par défaut aux options d'administration
 			$tbl_optionsAdmin = array(
 				'enabled'		=> true,
@@ -81,11 +86,13 @@ if( !class_exists(AdminController)){
 			//les options sont renvoyées pour être utilisées
 			return $tbl_optionsAdmin;
 		}
+                */
 		
 		/**
 		 * Panneau d'admin
 		 */
-		function printAdminPage(){
+		/*
+                function printAdminPage(){
 			echo "printAdminPage";
 			$options = $this->getOptionsAdmin();
 			// si le post du bouton existe (update_eewee_settings = attribut name du bouton)
@@ -102,6 +109,7 @@ if( !class_exists(AdminController)){
 			// include du formulaire HTML
 			include(EEWEE_RESTAURANT_MENU_PLUGIN_DIR.'/view/admin_settings.php');
 		}
+                */
 		
 	}//fin class
 }//fin if

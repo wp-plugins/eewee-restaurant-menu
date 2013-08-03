@@ -13,7 +13,7 @@ if( !class_exists(ToolsControllers)){
 		 * @param bool $r
 		 */
 		public function verifMaj( $r ){
-			if( $r == 1 ){
+			if( $r > 0 || $r === 0 ){
 				echo '
 				<div id="setting-error-settings_updated" class="updated settings-error"> 
 					<p><strong>'.__("Options recorded.", PLUGIN_NOM_LANG).'</strong></p>

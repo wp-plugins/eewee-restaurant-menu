@@ -3,11 +3,15 @@ global $wpdb;
 
 // update
 if( $_POST['update'] ){
+        $t_plat_plat = new TLangPlat();
+	$r = $t_plat_plat->update( $_POST );
+        
 	$t_plat = new TPlat();
 	$r = $t_plat->update( $_POST );
 	
-	$tools = new ToolsControllers();
-	$tools->verifMaj( $r );
+        $tools = new ToolsControllers();
+        $tools->verifMaj( $r );            
+
 }//if
 
 $t_plat = new TPlat();

@@ -117,7 +117,6 @@ if( !class_exists(TPlat)){
 					'%d'
 				)
 			);
-			
 			return $r;
 		}
 		

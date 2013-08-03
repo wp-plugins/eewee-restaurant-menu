@@ -14,7 +14,10 @@ if( !class_exists(Form_PlatAdd)){
 		 * retourn form
  		 * @param $_POST $p
  		 */ 
-		public function platAdd( $p="" ){ ?>
+		public function platAdd( $p="" ){
+                    $t_lang = new TLang();
+                    $langs = $t_lang->getLangs(); ?>
+
 			<form method="post" action="<?php echo $this->_action; ?>">
 				<input type='hidden' name='form_id' value='<?php echo $p[0]->ID_PLAT; ?>' />
 				
@@ -58,15 +61,66 @@ if( !class_exists(Form_PlatAdd)){
                                                              <input type="text" name="form_nom" value="<?php echo $p[0]->NOM; ?>" />    
                                                         </td>
                                                 </tr>
+                                                <?php
+                                                foreach( $langs as $lang ){ 
+                                                    $t_lang_plat = new TLangPlat();
+                                                    $req        = " WHERE ID_LANG=%d AND ID_PLAT=%d";
+                                                    $params     = array();
+                                                    $params[]   = $lang->ID_LANG;
+                                                    $params[]   = $r[0]->ID_PLAT;
+                                                    //$langPlat   = $t_lang_plat->getLangPlats($req, $params);
+                                                    ?>
+                                                    <tr>
+                                                        <th>
+                                                             <?php _e('Name', PLUGIN_NOM_LANG); echo " (".$lang->NOM.")"; ?> : 
+                                                        </th>
+                                                        <td>
+                                                             <?php
+                                                             if( isset( $_POST["form_nom_".$lang->ID_LANG] ) && !empty( $_POST["form_nom_".$lang->ID_LANG] ) ){
+                                                                 $postNom = $_POST["form_nom_".$lang->ID_LANG];
+                                                             }else{
+                                                                 $postNom = "";
+                                                             } ?>
+                                                             <input type="text" name="form_nom_<?php echo $lang->ID_LANG; ?>" value="<?php //echo $postNom; ?>" />
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                } ?>
                                                 <tr>
                                                         <th>
                                                              <?php _e('Ingredient', PLUGIN_NOM_LANG); ?> : 
                                                         </th>
                                                         <td>
                                                             <input type="text" name="form_ingredient" value="<?php echo $p[0]->INGREDIENT; ?>" /><br />
-                                                            <p class="description"><?php _e('1 ingredient line', PLUGIN_NOM_LANG); ?></p>
+                                                            <p class="description"><?php _e('ex: xxx, yyy, zzz', PLUGIN_NOM_LANG); ?></p>
                                                         </td>
                                                 </tr>
+                                                <?php
+                                                foreach( $langs as $lang ){
+                                                    $t_lang_plat = new TLangPlat();
+                                                    $req        = " WHERE ID_LANG=%d AND ID_PLAT=%d";
+                                                    $params     = array();
+                                                    $params[]   = $lang->ID_LANG;
+                                                    $params[]   = $r[0]->ID_PLAT;
+                                                    $langPlat   = $t_lang_plat->getLangPlats($req, $params);
+                                                    ?>
+                                                    <tr>
+                                                        <th>
+                                                             <?php _e('Ingredient', PLUGIN_NOM_LANG); echo " (".$lang->NOM.")"; ?> : 
+                                                        </th>
+                                                        <td>
+                                                             <?php
+                                                             if( isset( $_POST["form_ingredient_".$lang->ID_LANG] ) && !empty( $_POST["form_ingredient_".$lang->ID_LANG] ) ){
+                                                                 $postIngredient = $_POST["form_ingredient_".$lang->ID_LANG];
+                                                             }else{
+                                                                 $postIngredient = "";
+                                                             } ?>
+                                                            <input type="text" name="form_ingredient_<?php echo $lang->ID_LANG; ?>" value="<?php //echo $postIngredient; ?>" /><br />
+                                                             <p class="description"><?php _e('ex: xxx, yyy, zzz', PLUGIN_NOM_LANG); ?></p>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                } ?>
                                                 <tr>
                                                         <th>
                                                             <?php _e('Price', PLUGIN_NOM_LANG); ?> : 

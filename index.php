@@ -3,7 +3,7 @@
 Plugin Name: Eewee restaurant menu
 Plugin URI: http://www.eewee.fr
 Description: Management of restaurant menus. Composition dish of the day. Create your own dishes with ingredients, prices, ...
-Version: 1.3
+Version: 1.6
 Author: Michael DUMONTET
 Author URI: http://www.eewee.fr/wordpress/
 License: GPLv2 or later
@@ -16,13 +16,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * @since 1.0.0
  */
 global $wpdb;
-define( 'EEWEE_VERSION', '1.3' );
+define( 'EEWEE_VERSION', '1.6' );
 define( 'EEWEE_RESTAURANT_MENU_PLUGIN_DIR', 		WP_PLUGIN_DIR . '/' . dirname( plugin_basename( __FILE__ ) ) );
 define( 'EEWEE_RESTAURANT_MENU_PLUGIN_URL', 		WP_PLUGIN_URL . '/' . dirname( plugin_basename( __FILE__ ) ) );
 define( 'EEWEE_RESTAURANT_MENU_PREFIXE_BDD',		$wpdb->prefix.'eewee_restaurant_');
 define( 'PLUGIN_NOM_LANG',                              "eewee-restaurant-menu");
 define( 'EEWEE_RESTAURANT_MENU_DEBUG',                  false);
-for( $i=1 ; $i<=7 ; $i++ ){
+for( $i=1 ; $i<=8 ; $i++ ){
     define( 'EEWEE_RESTAURANT_MENU_URL_SOUS_MENU_'.$i,          admin_url( 'admin.php?page=idSousMenu'.$i, 'http' ) );
     define( 'EEWEE_RESTAURANT_MENU_URL_BACK_SOUS_MENU_'.$i,	admin_url().'admin.php?page=idSousMenu'.$i);
 }
@@ -53,6 +53,8 @@ require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/models/TPlat.php' );
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/models/TPlatCategorie.php' );
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/models/TDevise.php' );
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/models/TTaxe.php' );
+require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/models/TLang.php' );
+require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/models/TLangPlat.php' );
 // FORMS
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FMenuSearch.php' );
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FMenuEdit.php' );
@@ -75,6 +77,9 @@ require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FDeviseAdd.php' );
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FTaxeSearch.php' );
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FTaxeEdit.php' );
 require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FTaxeAdd.php' );
+require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FLangSearch.php' );
+require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FLangEdit.php' );
+require_once ( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/forms/FLangAdd.php' );
 // CONTROLLERS
 require_once( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/controllers/InstallController.php' );
 require_once( EEWEE_RESTAURANT_MENU_PLUGIN_DIR . '/controllers/ToolsController.php' );
