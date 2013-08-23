@@ -14,7 +14,7 @@ if( !class_exists(TPlat)){
 		public function getPlats( $req="", $params="" ){
 			global $wpdb;
 			$sql	= $wpdb->prepare("SELECT * FROM ".$this->_table." ".$req, $params);
-			$r		= $wpdb->get_results($sql);
+			$r	= $wpdb->get_results($sql);
 			return $r;
 		}
 		
@@ -25,7 +25,7 @@ if( !class_exists(TPlat)){
 		public function getPlat( $id ){
 			global $wpdb;
 			$sql	= $wpdb->prepare("SELECT * FROM ".$this->_table." WHERE ID_PLAT=%d", $id);
-			$r		= $wpdb->get_results($sql);
+			$r	= $wpdb->get_results($sql);
 			return $r;
 		}
 		

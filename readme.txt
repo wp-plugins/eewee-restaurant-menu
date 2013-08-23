@@ -41,6 +41,9 @@ PS: question, [eewee.fr](http://www.eewee.fr).
 
 == Changelog ==
 
+= 1.6.1 =
+* Fixed   : BO
+
 = 1.6 =
 * Add   : multilingual add of Products
 

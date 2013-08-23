@@ -14,7 +14,7 @@ if( !class_exists(TLangPlat)){
 		public function getLangPlats( $req="", $params="" ){
 			global $wpdb;
 			$sql	= $wpdb->prepare("SELECT * FROM ".$this->_table." ".$req, $params);
-			$r		= $wpdb->get_results($sql);
+			$r	= $wpdb->get_results($sql);
 			return $r;
 		}
 		
@@ -25,7 +25,7 @@ if( !class_exists(TLangPlat)){
 		public function getLangPlat( $id ){
 			global $wpdb;
 			$sql	= $wpdb->prepare("SELECT * FROM ".$this->_table." WHERE ID_LANG_PLAT=%d", $id);
-			$r		= $wpdb->get_results($sql);
+			$r	= $wpdb->get_results($sql);
 			return $r;
 		}
 		
@@ -112,30 +112,32 @@ if( !class_exists(TLangPlat)){
                         
                         $t_lang = new TLang();
                         $langs = $t_lang->getLangs();
-                        foreach( $langs as $lang ){
-                            $r = $wpdb->update(
-                                    $this->_table,
-                                    // SET (valeur)
-                                    array(
-                                            'NOM' => $p['form_nom_'.$lang->ID_LANG],
-                                            'INGREDIENT' => $p['form_ingredient_'.$lang->ID_LANG],
-                                    ),
-                                    // WHERE (valeur)
-                                    array(
-                                            'ID_PLAT' => $p['form_id'],
-                                            'ID_LANG' => $lang->ID_LANG,
-                                    ),
-                                    // SET (type)
-                                    array(
-                                            '%s',
-                                            '%s'
-                                    ),
-                                    // WHERE (type)
-                                    array(
-                                            '%d',
-                                            '%d'
-                                    )
-                            );
+                        if( sizeof($langs) > 0 ){
+                            foreach( $langs as $lang ){
+                                $r = $wpdb->update(
+                                        $this->_table,
+                                        // SET (valeur)
+                                        array(
+                                                'NOM' => $p['form_nom_'.$lang->ID_LANG],
+                                                'INGREDIENT' => $p['form_ingredient_'.$lang->ID_LANG],
+                                        ),
+                                        // WHERE (valeur)
+                                        array(
+                                                'ID_PLAT' => $p['form_id'],
+                                                'ID_LANG' => $lang->ID_LANG,
+                                        ),
+                                        // SET (type)
+                                        array(
+                                                '%s',
+                                                '%s'
+                                        ),
+                                        // WHERE (type)
+                                        array(
+                                                '%d',
+                                                '%d'
+                                        )
+                                );
+                            }
                         }
                         return $r;
 		}
