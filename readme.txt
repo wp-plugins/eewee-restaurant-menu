@@ -41,8 +41,11 @@ PS: question, [eewee.fr](http://www.eewee.fr).
 
 == Changelog ==
 
+= 1.6.2 =
+* Add   : Shortcode 'laCarte' (choose by id category)
+
 = 1.6.1 =
-* Fixed   : BO
+* Fixed : BO
 
 = 1.6 =
 * Add   : multilingual add of Products

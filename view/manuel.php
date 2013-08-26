@@ -42,12 +42,18 @@
         <section id="general2">
           <h2><?php _e('Dish', PLUGIN_NOM_LANG); ?></h2>
           <p>
-            <pre><code><strong>[laCarte]</strong></code></pre> 
+            <pre><code><strong>[laCarte categ=1]</strong></code></pre>
+            <ul>
+                <li>categ : id of your category</li>
+            </ul>
           </p>
           <h3><?php _e('Examples', PLUGIN_NOM_LANG); ?> :</h3>
           <p>
           	<strong><?php _e('Display the dish', PLUGIN_NOM_LANG); ?></strong>
           	<br />[laCarte]
+                <br />[laCarte categ=1]
+                <br />[laCarte categ=2]
+                <br />[laCarte categ=...]
           </p>
         </section><!-- general2 -->
         

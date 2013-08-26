@@ -123,7 +123,7 @@
 		 * @param array $atts
 		 */
 		public function laCarte( $atts='' ){
-                    extract( shortcode_atts(array('id'=>''), $atts ));
+                    extract( shortcode_atts(array('id'=>'', 'categ'=>''), $atts ));
                     
                     $t_lang = new TLang();
                     $langs = $t_lang->getLangs();
@@ -141,9 +141,14 @@
                         $sep = $tbl_sep[$separator_val];
                     }
 
-                    $t_platCateg = new TPlatCategorie();
-                    $platCategs = $t_platCateg->getPlatCategories();
-
+                    if( isset($categ) && !empty($categ) ){
+                        $t_platCateg = new TPlatCategorie();
+                        $platCategs = $t_platCateg->getPlatCategorie($categ);
+                    }else{
+                        $t_platCateg = new TPlatCategorie();
+                        $platCategs = $t_platCateg->getPlatCategories();
+                    }
+                    
                     $platCategTemp = $composition = "";
                     foreach( $platCategs as $platCateg ){
                         if( $platCategTemp != $platCateg->ID_PLAT_CATEGORIE ){
