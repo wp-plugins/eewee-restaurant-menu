@@ -172,8 +172,14 @@
                             $t_plat = new TPlat();
                             $plats = $t_plat->getPlats( " WHERE ID_PLAT_CATEGORIE='".$platCateg->ID_PLAT_CATEGORIE."' AND ETAT='0'");
                             foreach($plats as $plat){
-                                $composition .= "<p><span class='plat'>";
+                                $composition .= "<p class='p_plat'><span class='plat'>";
                                     $composition .= $plat->NOM;
+                                    
+                                    $composition .= "<span class='f_r'>";
+                                    if( $location == 1 ){ $composition .= $devise."&nbsp;"; }
+                                    $composition .= number_format($plat->PRIX, 2, $sep, '');
+                                    if( $location == 0 ){ $composition .= "&nbsp;".$devise; }
+                                    $composition .= "</span><br />";
                                     
                                     foreach( $langs as $lang ){
                                         $t_lang_plat    = new TLangPlat();
@@ -188,7 +194,7 @@
                                         }
 
                                     }
-                                $composition .= "</span><br />";
+                                $composition .= "</span>";
                                 
                                 if( !empty($plat->INGREDIENT) ){
                                     $composition .= "<span class='ingredients'>";
@@ -207,18 +213,10 @@
                                             }
 
                                         }
-                                    $composition .= "</span> ";
-                                    
+                                    $composition .= "</span><br /><br /> ";
                                 }
-                                $composition .= "<span class='f_r'>";
                                 
-                                if( $location == 1 ){ $composition .= $devise."&nbsp;"; }
-                            
-                                $composition .= number_format($plat->PRIX, 2, $sep, '');
-                                    
-                                if( $location == 0 ){ $composition .= "&nbsp;".$devise; }
-                                        
-                                $composition .= "</span></p>";
+                                $composition .= "</p>";
                             }
                         }
                     }

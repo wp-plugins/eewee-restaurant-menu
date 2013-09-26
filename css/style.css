@@ -1,9 +1,9 @@
 /**
  * SOMMAIRE :
  * - MENU
- * - 
+ * - PLAT
  * - TABLE
- * - ...
+ * - DIVERS
  */
 
 /* MENU */ 
@@ -12,7 +12,8 @@
 .restaurant-menu .plat{}
 .restaurant-menu .ingredients{ font-style: italic; font-size: 0.8em; color: grey; }
 
- 
+ /* PLAT */
+ .p_plat{ margin: 0; }
 
 /* TABLE */
 table th.c, table td.c{ text-align: center; }
