@@ -4,7 +4,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: restaurant, menu, carte, food, eat, dish of the day
 Requires at least: 3.1
-Tested up to: 3.5
+Tested up to: 4.0
 Stable tag: trunk
 
 Management of restaurant menus. Composition dish of the day. Create your own dishes with ingredients, prices, ...
@@ -40,6 +40,9 @@ PS: question, [eewee.fr](http://www.eewee.fr).
 * ...
 
 == Changelog ==
+
+= 1.6.4 =
+* Compatible WP4.0 Benny
 
 = 1.6.2 =
 * Add   : Shortcode 'laCarte' (choose by id category)
