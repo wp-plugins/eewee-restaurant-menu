@@ -17,7 +17,7 @@ if( !class_exists(TLangPlat)){
 			$r	= $wpdb->get_results($sql);
 			return $r;
 		}
-		
+
 		/**
 		 * retourn row
 		 * @param int $id
@@ -27,6 +27,22 @@ if( !class_exists(TLangPlat)){
 			$sql	= $wpdb->prepare("SELECT * FROM ".$this->_table." WHERE ID_LANG_PLAT=%d", $id);
 			$r	= $wpdb->get_results($sql);
 			return $r;
+		}
+		
+		/**
+		 * retourn row
+		 * @param int $idLang
+		 * @param int $idPlat
+		 */
+		public function isExistLangPlat( $idLang, $idPlat ){
+			global $wpdb;
+			$sql	= $wpdb->prepare("SELECT count(*) as nb FROM ".$this->_table." WHERE ID_LANG=%d AND ID_PLAT=%d", $idLang, $idPlat);
+			$r	= $wpdb->get_results($sql);
+			if( $r[0]->nb > 0 ){
+				return true;
+			}else{
+				return false;
+			}
 		}
 		
 		/**
@@ -114,6 +130,31 @@ if( !class_exists(TLangPlat)){
                         $langs = $t_lang->getLangs();
                         if( sizeof($langs) > 0 ){
                             foreach( $langs as $lang ){
+                            	
+                            	// verif
+                            	$isExistLangPlat = $this->isExistLangPlat( $lang->ID_LANG, $p['form_id'] );
+                            	if( !$isExistLangPlat ){
+	                            	// add
+                            		$r = $wpdb->insert(
+                            				$this->_table,
+                            				// SET (valeur)
+                            				array(
+                            						'ID_LANG' => $lang->ID_LANG,
+                            						'ID_PLAT' => $p['form_id'],
+                            						'NOM' => $p['form_nom_'.$lang->ID_LANG],
+                            						'INGREDIENT' => $p['form_ingredient_'.$lang->ID_LANG],
+                            				),
+                            				// SET (type)
+                            				array(
+                            						'%d',
+                            						'%d',
+                            						'%s',
+                            						'%s'
+                            				)
+                            		);
+                            	}//if
+                            	 
+                            	// update
                                 $r = $wpdb->update(
                                         $this->_table,
                                         // SET (valeur)

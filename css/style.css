@@ -13,7 +13,14 @@
 .restaurant-menu .ingredients{ font-style: italic; font-size: 0.8em; color: grey; }
 
  /* PLAT */
- .p_plat{ margin: 0; }
+ .p_plat{ margin: 0 0 30px 0; }
+
+/* MARGIN */
+.mb10{margin-bottom:10px;}
+.mb20{margin-bottom:20px;}
+.mb30{margin-bottom:30px;}
+.mb40{margin-bottom:40px;}
+.mb50{margin-bottom:50px;}
 
 /* TABLE */
 table th.c, table td.c{ text-align: center; }

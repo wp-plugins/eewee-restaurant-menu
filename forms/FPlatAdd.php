@@ -131,6 +131,14 @@ if( !class_exists(Form_PlatAdd)){
                                                 </tr>
                                                 <tr>
                                                         <th>
+                                                            <?php _e('Order', PLUGIN_NOM_LANG); ?> : 
+                                                        </th>
+                                                        <td>
+                                                            <input type="text" name="form_order" value="<?php echo $p[0]->ORDER_PLAT; ?>" />        
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <th>
                                                             <?php _e('State', PLUGIN_NOM_LANG); ?> :     
                                                         </th>
                                                         <td>

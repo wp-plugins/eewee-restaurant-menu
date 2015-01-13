@@ -123,6 +123,15 @@ if( !class_exists(Form_PlatEdit)){
                                                 </tr>
                                                 <tr>
                                                         <th>
+                                                            <?php _e('Order', PLUGIN_NOM_LANG); ?> : 
+                                                        </th>
+                                                        <td>
+                                                            <input type="text" name="form_order" value="<?php echo $r[0]->ORDER_PLAT; ?>" /><br />
+                                                            <p class="description"><?php _e('ex: 10', PLUGIN_NOM_LANG); ?></p>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <th>
                                                             <?php _e('State', PLUGIN_NOM_LANG); ?> :     
                                                         </th>
                                                         <td>

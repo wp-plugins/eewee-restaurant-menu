@@ -74,6 +74,9 @@ $render = "
 			".__('Price', PLUGIN_NOM_LANG)."
 		</th>
                 <th>
+			".__('Order', PLUGIN_NOM_LANG)."
+		</th>
+                <th>
 			".__('State', PLUGIN_NOM_LANG)."
 		</th>
 		<th>
@@ -98,6 +101,9 @@ $render = "
 			</td>
                         <td>
 				".$v->PRIX."
+			</td>
+                        <td>
+				".$v->ORDER_PLAT."
 			</td>
 			<td class='c'>";
 				

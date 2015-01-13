@@ -42,13 +42,15 @@ if( !class_exists(TPlat)){
 					'NOM' => stripslashes($p['form_nom']),
 					'INGREDIENT' => stripslashes($p['form_ingredient']),
 					'PRIX' => $p['form_prix'],
+					'ORDER_PLAT' => $p['form_order'],
 					'ETAT' => $p['form_etat']
 				),
 				array(
 					'%d',
-                                        '%s',
-                                        '%s',
-                                        '%f',
+                    '%s',
+                    '%s',
+					'%f',
+					'%d',
 					'%d'
 				)
 			);
@@ -98,7 +100,8 @@ if( !class_exists(TPlat)){
                                         'NOM' => stripslashes($p['form_nom']),
                                         'INGREDIENT' => stripslashes($p['form_ingredient']),
                                         'PRIX' => $p['form_prix'],
-					'ETAT' => $p['form_etat']
+										'ORDER_PLAT' => $p['form_order'],
+										'ETAT' => $p['form_etat']
 				),
 				// WHERE (valeur)
 				array(
@@ -106,11 +109,12 @@ if( !class_exists(TPlat)){
 				),
 				// SET (type)
 				array(
-					'%d',
+										'%d',
                                         '%s',
                                         '%s',
                                         '%f',
-					'%d'
+										'%d',
+										'%d'
 				),
 				// WHERE (type)
 				array(

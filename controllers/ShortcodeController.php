@@ -53,14 +53,15 @@
                                     $typeTemp = $menuComposition->ID_MENU_TYPE;
                                 }
                                 
-                                // get flat
+                                // get Plat
                                 $t_plat = new TPlat();
                                 $plat = $t_plat->getPlat($menuComposition->ID_PLAT);
                                 if( $plat[0]->ETAT == 0 ){
                                     $ingredients = $plat[0]->INGREDIENT;
                                     $composition .= "<p><span class='plat'>";
-                                        $composition .= $plat[0]->NOM;
+                                        $composition .= $plat[0]->NOM." (".$ingredients.")";
                                         
+                                        $tblLangPlat = array();
                                         foreach( $langs as $lang ){
                                             $t_lang_plat    = new TLangPlat();
                                             $req            = " WHERE ID_LANG=%d AND ID_PLAT=%d";
@@ -69,17 +70,20 @@
                                             $params[]       = $menuComposition->ID_PLAT;
                                             $langPlats      = $t_lang_plat->getLangPlats($req, $params);
                                             
+                                            
                                             foreach( $langPlats as $langPlat ){
-                                                $composition .= " / <small>".$langPlat->NOM."</small>";
+                                                if( !empty($langPlat->NOM) ){
+	                                            	$tblLangPlat[] = $langPlat->NOM;
+                                                }
                                             }
                                             
                                         }
+                                        $composition .= '<br><small>'.implode(" / ", $tblLangPlat).'</small>';
                                         
-                                    $composition .= "</span><br />";
+                                    $composition .= "</span>";
                                     if( !empty($ingredients) ){
                                         $composition .= "<span class='ingredients'>";
-                                            $composition .= "(".$ingredients.")";
-
+                                            
                                             foreach( $langs as $lang ){
                                                 $t_lang_plat    = new TLangPlat();
                                                 $req            = " WHERE ID_LANG=%d AND ID_PLAT=%d";
@@ -89,7 +93,9 @@
                                                 $langPlats      = $t_lang_plat->getLangPlats($req, $params);
 
                                                 foreach( $langPlats as $langPlat ){
-                                                    $composition .= "<br /><small>(".$langPlat->INGREDIENT.")</small>";
+                                                	if( !empty($langPlat->INGREDIENT) ){
+	                                                	$composition .= "<br><small>(".$langPlat->INGREDIENT.")</small>";
+                                                	}
                                                 }
 
                                             }
@@ -170,35 +176,41 @@
                         if( $enLigne ){
                             // get flat
                             $t_plat = new TPlat();
-                            $plats = $t_plat->getPlats( " WHERE ID_PLAT_CATEGORIE='".$platCateg->ID_PLAT_CATEGORIE."' AND ETAT='0'");
+                            $plats = $t_plat->getPlats( " WHERE ID_PLAT_CATEGORIE='".$platCateg->ID_PLAT_CATEGORIE."' AND ETAT='0' ORDER BY ORDER_PLAT ASC");
                             foreach($plats as $plat){
                                 $composition .= "<p class='p_plat'><span class='plat'>";
-                                    $composition .= $plat->NOM;
+                                    $composition .= $plat->NOM.' ('.$plat->INGREDIENT.')';
                                     
                                     $composition .= "<span class='f_r'>";
-                                    if( $location == 1 ){ $composition .= $devise."&nbsp;"; }
-                                    $composition .= number_format($plat->PRIX, 2, $sep, '');
-                                    if( $location == 0 ){ $composition .= "&nbsp;".$devise; }
-                                    $composition .= "</span><br />";
+                                   		if( $location == 1 ){ $composition .= $devise."&nbsp;"; }
+                                    	$composition .= number_format($plat->PRIX, 2, $sep, '');
+                                    	if( $location == 0 ){ $composition .= "&nbsp;".$devise; }
+                                    $composition .= "</span>";
                                     
+                                    $compositionPlat = array();
                                     foreach( $langs as $lang ){
-                                        $t_lang_plat    = new TLangPlat();
+                                    	$t_lang_plat    = new TLangPlat();
                                         $req            = " WHERE ID_LANG=%d AND ID_PLAT=%d";
                                         $params         = array();
                                         $params[]       = $lang->ID_LANG;
-                                        $params[]       = $platCateg->ID_PLAT_CATEGORIE;
+                                        $params[]       = $plat->ID_PLAT;
                                         $langPlats      = $t_lang_plat->getLangPlats($req, $params);
 
+                                        $tblLangPlat = array();
                                         foreach( $langPlats as $langPlat ){
-                                            $composition .= " / <small>".$langPlat->NOM."</small>";
+                                        	if( !empty($langPlat->NOM) ){
+	                                        	$compositionPlat[] = $langPlat->NOM;
+                                        	}
                                         }
-
+										
+                                    }
+                                    if( is_array($compositionPlat) ){
+	                                    $composition .= '<br><small>'.implode(" / ", $compositionPlat).'</small> ';
                                     }
                                 $composition .= "</span>";
                                 
                                 if( !empty($plat->INGREDIENT) ){
                                     $composition .= "<span class='ingredients'>";
-                                        $composition .= "(".$plat->INGREDIENT.")";
                                         
                                         foreach( $langs as $lang ){
                                             $t_lang_plat    = new TLangPlat();
@@ -209,12 +221,14 @@
                                             $langPlats      = $t_lang_plat->getLangPlats($req, $params);
 
                                             foreach( $langPlats as $langPlat ){
-                                                $composition .= "<br /><small>(".$langPlat->INGREDIENT.")</small>";
+                                            	if( !empty($langPlat->INGREDIENT) ){
+	                                                $composition .= "<br><small>(".$langPlat->INGREDIENT.")</small>";
+                                            	}
                                             }
 
                                         }
-                                    $composition .= "</span><br /><br /> ";
-                                }
+                                    $composition .= "</span> ";
+                                }//if
                                 
                                 $composition .= "</p>";
                             }

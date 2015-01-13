@@ -41,6 +41,9 @@ PS: question, [eewee.fr](http://www.eewee.fr).
 
 == Changelog ==
 
+= 1.6.5 =
+* Fixed	: order plat and multilangual
+
 = 1.6.4 =
 * Compatible WP4.0 Benny
 
