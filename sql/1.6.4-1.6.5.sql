@@ -1,0 +1,1 @@
+ALTER TABLE `wp_eewee_restaurant_plat` ADD `ORDER_PLAT` INT NOT NULL AFTER `ETAT`;
