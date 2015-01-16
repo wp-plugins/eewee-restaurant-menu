@@ -3,7 +3,7 @@
 Plugin Name: Eewee restaurant menu
 Plugin URI: http://www.eewee.fr
 Description: Management of restaurant menus. Composition dish of the day. Create your own dishes with ingredients, prices, ...
-Version: 1.6.5
+Version: 1.6.6
 Author: Michael DUMONTET
 Author URI: http://www.eewee.fr/wordpress/
 License: GPLv2 or later
@@ -16,7 +16,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * @since 1.0.0
  */
 global $wpdb;
-define( 'EEWEE_VERSION', '1.6.5' );
+define( 'EEWEE_VERSION', '1.6.6' );
 define( 'EEWEE_RESTAURANT_MENU_PLUGIN_DIR', 		WP_PLUGIN_DIR . '/' . dirname( plugin_basename( __FILE__ ) ) );
 define( 'EEWEE_RESTAURANT_MENU_PLUGIN_URL', 		WP_PLUGIN_URL . '/' . dirname( plugin_basename( __FILE__ ) ) );
 define( 'EEWEE_RESTAURANT_MENU_PREFIXE_BDD',		$wpdb->prefix.'eewee_restaurant_');

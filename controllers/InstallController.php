@@ -59,6 +59,7 @@
                       `INGREDIENT` text NOT NULL,
                       `PRIX` float NOT NULL,
                       `ETAT` tinyint(1) NOT NULL,
+                      `ORDER_PLAT` int(11) NOT NULL,
                       PRIMARY KEY (`ID_PLAT`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
                     ";

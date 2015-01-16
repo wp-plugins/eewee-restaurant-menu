@@ -174,12 +174,14 @@
                         }
                         
                         if( $enLigne ){
+                        	$afficherLang = array();
+                        	
                             // get flat
                             $t_plat = new TPlat();
                             $plats = $t_plat->getPlats( " WHERE ID_PLAT_CATEGORIE='".$platCateg->ID_PLAT_CATEGORIE."' AND ETAT='0' ORDER BY ORDER_PLAT ASC");
                             foreach($plats as $plat){
                                 $composition .= "<p class='p_plat'><span class='plat'>";
-                                    $composition .= $plat->NOM.' ('.$plat->INGREDIENT.')';
+                                    $composition .= $plat->NOM;
                                     
                                     $composition .= "<span class='f_r'>";
                                    		if( $location == 1 ){ $composition .= $devise."&nbsp;"; }
@@ -199,6 +201,7 @@
                                         $tblLangPlat = array();
                                         foreach( $langPlats as $langPlat ){
                                         	if( !empty($langPlat->NOM) ){
+                                        		$afficherLang[] = true;
 	                                        	$compositionPlat[] = $langPlat->NOM;
                                         	}
                                         }
@@ -211,22 +214,24 @@
                                 
                                 if( !empty($plat->INGREDIENT) ){
                                     $composition .= "<span class='ingredients'>";
-                                        
-                                        foreach( $langs as $lang ){
-                                            $t_lang_plat    = new TLangPlat();
-                                            $req            = " WHERE ID_LANG=%d AND ID_PLAT=%d";
-                                            $params         = array();
-                                            $params[]       = $lang->ID_LANG;
-                                            $params[]       = $platCateg->ID_PLAT_CATEGORIE;
-                                            $langPlats      = $t_lang_plat->getLangPlats($req, $params);
-
-                                            foreach( $langPlats as $langPlat ){
-                                            	if( !empty($langPlat->INGREDIENT) ){
-	                                                $composition .= "<br><small>(".$langPlat->INGREDIENT.")</small>";
-                                            	}
-                                            }
-
-                                        }
+                                    	if( in_array(true, $afficherLang) ){
+	                                        foreach( $langs as $lang ){
+	                                            $t_lang_plat    = new TLangPlat();
+	                                            $req            = " WHERE ID_LANG=%d AND ID_PLAT=%d";
+	                                            $params         = array();
+	                                            $params[]       = $lang->ID_LANG;
+	                                            $params[]       = $platCateg->ID_PLAT_CATEGORIE;
+	                                            $langPlats      = $t_lang_plat->getLangPlats($req, $params);
+	
+	                                            foreach( $langPlats as $langPlat ){
+	                                            	if( !empty($langPlat->INGREDIENT) ){
+		                                                $composition .= "<br><small>(".$langPlat->INGREDIENT.")</small>";
+	                                            	}
+	                                            }
+	                                        }//foreach
+                                    	}else{
+                                    		$composition .= "(".$plat->INGREDIENT.")";
+                                    	}
                                     $composition .= "</span> ";
                                 }//if
                                 
